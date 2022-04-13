@@ -23,7 +23,7 @@ const FilmesPopulares = () => {
     <div>
   <h1>Filmes Populares</h1>
   <h2>Os filmes mais populares que estão ou deram show de bilheteria</h2>
-      
+  {filmes.lenght === 0 && <h1>Carregando, um momento...</h1>}    
         <Row>
         {filmes.map(item => (
           <Col key={item.id} md={3} className='mb-3'>

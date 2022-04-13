@@ -21,6 +21,7 @@ const FilmesLancamentos = () => {
     <div>
   <h1>Filmes Lancamentos</h1>
   <h2>Filmes que acabaram de ser lançados para você assistir e ver seus detalhes</h2>
+  {filmes.lenght === 0 && <h1>Carregando, um momento...</h1>} 
       
         <Row>
         {filmes.map(item => (

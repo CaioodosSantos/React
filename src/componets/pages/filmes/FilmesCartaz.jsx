@@ -21,6 +21,7 @@ const FilmesCartaz = () => {
     <div>
   <h1>Filmes Cartaz</h1>
   <h2>Filmes que irão ser lançados em breve para você</h2>
+  {filmes.lenght === 0 && <h1>Carregando, um momento...</h1>} 
       
         <Row>
         {filmes.map(item => (
