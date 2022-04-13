@@ -24,7 +24,7 @@ const FilmesLancamentos = () => {
       
         <Row>
         {filmes.map(item => (
-          <Col md={3} className='mb-3'>
+          <Col key={item.id} md={3} className='mb-3'>
           <Card style={{ height: '38rem', padding:'3px' }}>
                 <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/'+item.poster_path} />
               <Card.Body>

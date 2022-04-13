@@ -20,7 +20,7 @@ const Objeto = (props) => {
       
       <Row>
         {carros.map(item => (
-            <Col md={3}>
+            <Col key={item.id} md={3}>
               <Card>
                   <Card.Img style={{ height: '19rem' }} variant="top" src={item.foto} />
                 <Card.Body>
