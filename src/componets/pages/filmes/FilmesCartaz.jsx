@@ -28,7 +28,7 @@ const FilmesCartaz = () => {
           <Card style={{ height: '38rem', padding:'3px' }}>
                 <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/'+item.poster_path} />
               <Card.Body>
-                        <Card.Title style={{padding:'10px'}} className='text-dark'>{item.title}</Card.Title>
+                        <Card.Title style={{padding:'11px'}} className='text-dark'>{item.title}</Card.Title>
                       
                       <Link className='btn btn-danger' to={"/componets/pages/filmes/" + item.id}>Detalhes</Link>
               </Card.Body>
