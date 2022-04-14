@@ -7,43 +7,72 @@ const FilmesDetalhes = () => {
 
     const params = useParams() 
 
-    const [filme, setfilmes] = useState([])
+    const [filme, setfilmes] = useState({})
+    const [atores, setAtores] = useState([])
 
     useEffect(()=>{
         
         apiFilmes.get('/movie/' + params.id + '?language=pt-BR').then(resultado=>{
             setfilmes(resultado.data)
     })
-    
-    
-    },[])
+
+        apiFilmes.get('/movie/' + params.id + '/credits?language=pt-BR').then(resultado=>{
+            setAtores(resultado.data.cast)
+    })
+ },[])
     
 
 
   return (
+      <div>
+    
+        {!filme.id && <h1>Carregando... Aguarde!</h1>}
+
+        {filme.id &&
     <div>
-            
-            <h1 style={{padding: '30px'}}>{filme.title}</h1>
+        <h1>{filme.title}</h1>
 
-            <Row>
-                <Col md={3}>
-                    <Card>
-                        <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
-                    </Card>
-                </Col>
-                <Col md={8}>
-                    <p><strong className='text-primary'>Título Original: </strong>{filme.original_title}</p>
-                    <p><strong className='text-primary'>Popularidade: </strong>{filme.popularity}</p>
-                    <p><strong className='text-primary'>Data de Lançamento: </strong>{filme.release_date}</p>
-                    <p><strong className='text-primary'>Orçamento: </strong>{filme.budget}</p>
-                    <p><strong className='text-primary'>Sinopse: </strong>{filme.overview}</p>
+        <Row>
+            <Col md={4}>
+                <Card>
+                    <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + filme.poster_path} />
+                </Card>
+            </Col>
+            <Col md={8}>
+                <p><strong>Título Original: </strong>{filme.original_title}</p>
+                <p><strong>Popularidade: </strong>{filme.popularity}</p>
+                <p><strong>Data de Lançamento: </strong>{filme.release_date}</p>
+                <p><strong>Orçamento: </strong>{filme.budget}</p>
                 
-                    <Link className='btn btn-primary' to={-1}>voltar</Link>
+                <p><strong>Gêneros: </strong>
+                    {filme.genres.map(item => (
+                        <span>{item.name}, </span>
+                    ))}
+                </p>
 
+                <p><strong>Sinopse: </strong>{filme.overview}</p>
+
+                <Link className='btn btn-primary' to={-1}>Voltar</Link>
+
+            </Col>
+        </Row>
+
+                <Col>
+                <h1>Atores</h1>
                 </Col>
-                
-            </Row>
-
+                <Row>
+                    {atores.map(item => (
+                        <Col className='mb-3' md={2} key={item.id}>
+                        <Link to='/componets/pages/atores/:id'>
+                            <Card title={item.name}>
+                                <Card.Img variant="top" src={'https://image.tmdb.org/t/p/w500/' + item.profile_path} />
+                            </Card>
+                        </Link>
+                        </Col>
+                        ))}
+                    </Row>     
+                    </div>
+        }
         </div>
   )
 }
